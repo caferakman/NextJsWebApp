@@ -35,34 +35,49 @@ const Header = () => {
 
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
+                    <Nav className="ml-auto" navbar>
 
-                    {!isAuth() && <React.Fragment>
-                        <NavItem>
-                            <Link href="/signin">
-                                <NavLink>Signin</NavLink>
-                            </Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link href="/signup">
-                                <NavLink>Signup</NavLink>
-                            </Link>
-                        </NavItem>
-                        </React.Fragment>}
-                        
+                        {!isAuth() && <React.Fragment>
+                            <NavItem>
+                                <Link href="/signin">
+                                    <NavLink>Signin</NavLink>
+                                </Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link href="/signup">
+                                    <NavLink>Signup</NavLink>
+                                </Link>
+                            </NavItem>
+                        </React.Fragment>}                        
+
+                        {isAuth() && isAuth().role === 0 && (
+                            <NavItem>
+                                <Link href="/user">
+                                    <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>
+
+                                </Link>
+                            </NavItem>
+                        )}
+
+                        {isAuth() && isAuth().role === 1 && (
+                            <NavItem>
+                                <Link href="/admin">
+                                    <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>
+
+                                </Link>
+                            </NavItem>
+                        )}
 
                         {isAuth() && (
                             <NavItem>
                                 <NavLink
                                     style={{ cursor: 'pointer' }}
-                                    onClick={() => 
-                                    signout(() => Router.replace(`/signin`))}>Signout</NavLink>
+                                    onClick={() =>
+                                        signout(() => Router.replace(`/signin`))}>Signout</NavLink>
                             </NavItem>
                         )}
 
-
                     </Nav>
-                    <NavbarText>Simple Text</NavbarText>
                 </Collapse>
             </Navbar>
         </div>
