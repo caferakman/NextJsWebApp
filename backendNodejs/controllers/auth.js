@@ -11,8 +11,8 @@ exports.signup = (req, res) => {
             })
         }
 
-        const {name, email, password} = req.body
-        let username = shortId.generate()
+        const {name, username, email, password} = req.body
+        //let username = shortId.generate()
         let profile = `${process.env.CLIENT_URL}/profile/${username}`
 
         let newUser = new User({name, email, password, profile, username})
@@ -102,7 +102,7 @@ exports.adminMiddleware = (req, res, next) => {
             })
         }
 
-        if(user.route !== 1) {
+        if(user.role !== 1) {
             return res.status(400).json({
                 error: 'Admin resource. Access denied'
             });

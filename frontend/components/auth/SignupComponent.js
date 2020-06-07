@@ -6,7 +6,8 @@ import Router from 'next/router';
 const SignupComponent = () => {
     const [values, setValues] = useState({
         name: '',
-        email: '',
+        username: '',
+        email: '', 
         password: '',
         error: '',
         loading: false,
@@ -14,7 +15,7 @@ const SignupComponent = () => {
         showForm: true
     })
 
-    const { name, email, password, error, loading, message, showForm } = values;
+    const { name, username, email, password, error, loading, message, showForm } = values;
 
     useEffect(() => {
         isAuth() && Router.push(`/`);
@@ -24,7 +25,7 @@ const SignupComponent = () => {
         e.preventDefault()
         //console.table({name, email, password, error, loading, message, showForm});
         setValues({ ...values, loading: true, error: false })
-        const user = { name, email, password }
+        const user = { name, username, email, password }
 
         signup(user).then(data => {
             if (data.error) {
@@ -33,6 +34,7 @@ const SignupComponent = () => {
                 setValues({
                     ...values,
                     name: '',
+                    username: '',
                     email: '',
                     password: '',
                     error: '',
@@ -65,6 +67,15 @@ const SignupComponent = () => {
                         type="text"
                         className="form-control"
                         placeholder="Type your name" />
+                </div>
+
+                <div className="form-group">
+                    <input
+                        value={username}
+                        onChange={handleChange('username')}
+                        type="text"
+                        className="form-control"
+                        placeholder="Type your username" />
                 </div>
 
                 <div className="form-group">
