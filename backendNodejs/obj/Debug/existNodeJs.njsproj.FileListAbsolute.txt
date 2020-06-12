@@ -1,3 +1,0 @@
-C:\Users\cashamerica12345\Documents\ReactNextJs\ReactNextJs\backend\obj\Debug\existNodeJs.njsprojAssemblyReference.cache
-C:\Users\cashamerica12345\Documents\ReactNextJs\ReactNextJs\backend\obj\Debug\existNodeJs.njsproj.CoreCompileInputs.cache
-C:\Users\cashamerica12345\Documents\ReactNextJs\ReactNextJs\backend\bin\Microsoft.NodejsTools.WebRole.dll

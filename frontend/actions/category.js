@@ -3,7 +3,7 @@ import {API} from '../config';
 
 
 export const create = (category, token) => {
-    return fetch('http://localhost:8000/api/category', {
+    return fetch('http://localhost:5000/api/category', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -19,7 +19,7 @@ export const create = (category, token) => {
 };
 
 export const getCategories = () => {
-    return fetch('http://localhost:8000/api/categories', {
+    return fetch('http://localhost:5000/api/categories', {
         method: 'GET'
     })
     .then(response => {
@@ -29,7 +29,7 @@ export const getCategories = () => {
 };
 
 export const singleCategory = (slug) => {
-    return fetch(`http://localhost:8000/api/category/${slug}`, {
+    return fetch(`http://localhost:5000/api/category/${slug}`, {
         method: 'GET'
     })
     .then(response => {
@@ -39,7 +39,7 @@ export const singleCategory = (slug) => {
 };
 
 export const removeCategory = (slug, token) => {
-    return fetch(`http://localhost:8000/api/category/${slug}`, {
+    return fetch(`http://localhost:5000/api/category/${slug}`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',

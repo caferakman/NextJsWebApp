@@ -3,7 +3,7 @@ import {API} from '../config'
 import cookie from 'js-cookie';
 
 export const signup = (user) => {
-    return fetch('http://localhost:8000/api/signup', {
+    return fetch('http://localhost:5000/api/signup', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -18,7 +18,7 @@ export const signup = (user) => {
 }
 
 export const signin = (user) => {
-    return fetch('http://localhost:8000/api/signin', {
+    return fetch('http://localhost:5000/api/signin', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -37,7 +37,7 @@ export const signout = (next) => {
     removeLocalStorage('user')
     next()
 
-    return fetch('http://localhost:8000/api/signout', {
+    return fetch('http://localhost:5000/api/signout', {
         method: 'GET'
     })
     .then(response => {
@@ -51,7 +51,7 @@ export const signout = (next) => {
 export const setCookie = (key, value) => {
     if(process.browser) {
         cookie.set(key, value, {
-            expires: 1
+            //expires: 1
         });
     }
 };
@@ -59,7 +59,7 @@ export const setCookie = (key, value) => {
 export const removeCookie = (key) => {
     if(process.browser) {
         cookie.remove(key, {
-            expires: 1
+            //expires: 1
         });
     }
 };
@@ -86,9 +86,8 @@ export const removeLocalStorage = (key) => {
 
 //authenticate user by pass data response to cookie and localstorage 
 export const authenticate = (data, next) => {
-    console.log('token')
     setCookie('token', data.token)
-    setLocalStorage('user', data.user);
+    setLocalStorage('user', data);
     next();
 }
 
@@ -98,6 +97,7 @@ export const isAuth = () => {
         const cookieChecked = getCookie('token')
         if (cookieChecked) {
             if(localStorage.getItem('user')) {
+                console.log(localStorage.getItem('user'))
                 return JSON.parse(localStorage.getItem('user'))
             } else {
                 return false;

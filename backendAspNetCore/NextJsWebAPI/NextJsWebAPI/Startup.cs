@@ -74,12 +74,12 @@ namespace NextJsWebAPI
                     };
                 });
 
-            /*services.AddIdentity<User, Role>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
             })
                 .AddEntityFrameworkStores<DataContext>()
-                .AddDefaultTokenProviders();*/
+                .AddDefaultTokenProviders();
 
             services.AddScoped<IUserService, UserService>();
         }

@@ -13,6 +13,7 @@ namespace NextJsWebAPI.Models
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -33,6 +34,12 @@ namespace NextJsWebAPI.Models
             builder.Entity<Category>(x =>
             {
                 x.ToTable("Category");
+                x.HasKey(i => i.Id);
+            });
+
+            builder.Entity<Tag>(x =>
+            {
+                x.ToTable("Tag");
                 x.HasKey(i => i.Id);
             });
 

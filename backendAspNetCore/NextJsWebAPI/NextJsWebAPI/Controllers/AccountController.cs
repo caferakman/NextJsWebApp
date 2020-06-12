@@ -74,6 +74,8 @@ namespace NextJsWebAPI.Controllers
                     {
                         id = user.Id,
                         role = user.Role,
+                        name = user.Name,
+                        username = user.UserName,
                         token = GenerateJwtToken(model)
                     });
                 }
