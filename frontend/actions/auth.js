@@ -37,13 +37,13 @@ export const signout = (next) => {
     removeLocalStorage('user')
     next()
 
-    return fetch('http://localhost:5000/api/signout', {
+    /*return fetch('http://localhost:5000/api/signout', {
         method: 'GET'
     })
     .then(response => {
         console.log('signout success')
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err));*/
 }
 
 

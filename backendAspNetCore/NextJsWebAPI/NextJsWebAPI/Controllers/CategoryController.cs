@@ -22,12 +22,11 @@ namespace NextJsWebAPI.Controllers
         [Route("api/category")]
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateCategory([FromBody] Category model)
+        public async Task<IActionResult> CreateCategory([FromBody]Category model)
         {
             try
             {
                 var category = new Category();
-                category.Id = model.Id;
                 category.Name = model.Name;
                 _dataContext.Add(category);
                 _dataContext.SaveChanges();
@@ -79,6 +78,7 @@ namespace NextJsWebAPI.Controllers
         }
 
         [Route("api/category/{id}")]
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteCategory(int id)
         {
@@ -89,6 +89,7 @@ namespace NextJsWebAPI.Controllers
                 Category cat = new Category();
                 var catid = _dataContext.Categories.Where(x => x.Id == id).FirstOrDefault();
                 _dataContext.Categories.Remove(catid);
+                _dataContext.SaveChanges();
 
                 return await Task.FromResult(Ok(message));
             }

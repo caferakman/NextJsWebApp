@@ -25,7 +25,6 @@ namespace NextJsWebAPI.Controllers
             try
             {
                 var tag = new Tag();
-                tag.Id = model.Id;
                 tag.TagName = model.TagName;
                 _dataContext.Add(tag);
                 _dataContext.SaveChanges();
@@ -77,6 +76,7 @@ namespace NextJsWebAPI.Controllers
         }
 
         [Route("api/tag/{id}")]
+        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteTag(int id)
         {
@@ -87,6 +87,7 @@ namespace NextJsWebAPI.Controllers
                 Tag _tag = new Tag();
                 var tagid = _dataContext.Tags.Where(x => x.Id == id).FirstOrDefault();
                 _dataContext.Tags.Remove(tagid);
+                _dataContext.SaveChanges();
 
                 return await Task.FromResult(Ok(message));
             }

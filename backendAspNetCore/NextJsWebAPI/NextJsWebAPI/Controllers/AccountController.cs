@@ -61,10 +61,10 @@ namespace NextJsWebAPI.Controllers
                     return BadRequest(new { message = "Username or password is incorrect" });
                 }
 
-                if (user.Role != 0) //user role = 0
+                /*if (user.Role != 0) //user role = 0
                 {
                     return BadRequest(new { message = "Username or password is incorrect" });
-                }
+                }*/
 
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
 

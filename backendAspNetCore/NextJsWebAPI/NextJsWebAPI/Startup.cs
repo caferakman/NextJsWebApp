@@ -54,6 +54,12 @@ namespace NextJsWebAPI
             //uses: Microsoft.AspNetCore.Mvc.NewtonsoftJson
             services.AddControllers().AddNewtonsoftJson();
 
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = false;
+            })
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthentication(o =>
             {
@@ -62,6 +68,7 @@ namespace NextJsWebAPI
                 o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(opt =>
                 {
+                    opt.SaveToken = true;
                     opt.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
@@ -72,16 +79,11 @@ namespace NextJsWebAPI
                         ValidIssuer = "http://localhost:5000",
                         ValidateLifetime = true
                     };
-                });
-
-            services.AddIdentity<User, IdentityRole>(options =>
-            {
-                options.User.RequireUniqueEmail = false;
-            })
-                .AddEntityFrameworkStores<DataContext>()
-                .AddDefaultTokenProviders();
+                });            
 
             services.AddScoped<IUserService, UserService>();
+
+            services.AddMvcCore().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,10 +95,6 @@ namespace NextJsWebAPI
             {
                 //app.UseDeveloperExceptionPage();
             }
-
-            
-            //app.UseStaticFiles();
-            //app.UseSpaStaticFiles();
 
             app.UseRouting();
             app.UseCors("ReactCorsPolicy");
